@@ -330,6 +330,7 @@ nav .hamburger.active .bar {
 
 .about {
     background: var(--bg-color);
+	padding-top: 80px;
 }
 
 .about .container-about{
