@@ -448,29 +448,13 @@ nav .hamburger.active .bar {
     margin-bottom: 10px;
 }
 
-.progress-bar {
+/* .progress-bar {
     width: 300px;
     height: 20px;
     background-color: #f0f0f0;
     margin-bottom: 10px;
     position: relative;
-  }
-
-
-
-  @keyframes increaseWidth {
-    0% { width: 0%; }
-    100% { width: var(--target-width, 0%); }
-}
-
-.progress-bar {
-    width: 0%; /* Initial width */
-}
-
-.animate-progress {
-    animation: increaseWidth 3s ease forwards; /* Adjust the duration and timing function as needed */
-}
-
+  } */
 
 
 /* ==== MEDIA SCREEN==== */
