@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+/* html {
+    scroll-behavior: smooth;
+  }
+   */
+
 * {
     margin: 0;
     padding: 0;
@@ -39,18 +44,30 @@ body {
     margin: 0 auto;
 }
 
-header {
+/* header {
     background: var(--bg-color);
     height: 90px;
     display: flex;
     align-items: center;
     justify-content: center;
+} */
+
+#navbar {
+    width: 100%;
+    background-color: rgba(51, 51, 51, 0.5); /* Adjust as needed */
+    position: fixed;
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
 }
 
 nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+nav a {
+    margin-left: 30px; /* Adjust as needed */
 }
 
 nav .logo {
@@ -79,15 +96,36 @@ nav ul {
     z-index: 1;
 }
 
+
+nav ul li {
+    position: relative;
+}
+
 nav ul li a {
     text-decoration: none;
     color: var(--white);
     transition: 0.4s ease;
 }
 
-nav ul li a:hover {
-    color: var(--text-color)
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    height: 2px;
+    width: 0;
+    background-color: var(--text-color); 
+    transition: width 0.3s ease;
 }
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+nav ul li a:hover {
+    color: var(--text-color);
+}
+
 
 nav .hamburger {
     position: relative;
@@ -97,7 +135,7 @@ nav .hamburger {
     background: none;
     outline: none;
     border: none;
-    display: block;
+    display: none;
     scale: 0.8;
 }
 
