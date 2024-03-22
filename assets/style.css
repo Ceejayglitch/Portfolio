@@ -345,6 +345,26 @@ nav .hamburger.active .bar {
 }
 
 .about .container-about{
+  background: var(--black);
+  padding: 30px;
+}
+
+.short-desc p{
+  color: var(--white);
+  font-family: "Space Mono", Arial, serif;
+  font-size: 13px;
+  text-align: justify;
+}
+
+.short-desc h2{
+    color: var(--text-color);
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: bold;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.contacts .container-about{
     background: var(--black);
     padding: 30px;
 }
@@ -409,6 +429,7 @@ nav .hamburger.active .bar {
   font-family: 'Bebas Neue', sans-serif;
   font-weight: bold;
   margin: 0 0 20px 0;
+  text-align: center;
 }
 
 .col-md-8 p{
@@ -419,7 +440,7 @@ nav .hamburger.active .bar {
 }
 
 .fh5co-social-icons {
-  align-self: end; /* Aligns the ul to the end (bottom) of the column */
+  text-align: center; /* Aligns the ul to the end (bottom) of the column */
 }
 
 /* icons*/
@@ -861,11 +882,18 @@ nav .hamburger.active .bar {
 	}
 }
 
-.ftco-section {
+.projects {
     padding: 7em 0;
     position: relative;
   }
 
+
+  /* ===================CONTACT================== */
+
+  .contacts{
+    padding: 7em 0;
+    position: relative;
+  }
 
 /* ==== MEDIA SCREEN==== */
 @media screen and (max-width: 1280px) {
