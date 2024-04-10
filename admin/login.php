@@ -25,7 +25,7 @@
             </form>
         </div>
         <div class="image">
-            <a href="../index.html"><img src="../images/cj_logo.png" alt="Portfolio Logo"></a>
+            <a href="../index.php"><img src="../images/cj_logo.png" alt="Portfolio Logo"></a>
         </div>
     </div>
 </body>

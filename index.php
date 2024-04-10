@@ -22,7 +22,7 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <a href="admin/login.html"><img src="images/cj_logo.png" alt="Portfolio Logo"></a>
+                    <a href="admin/login.php"><img src="images/cj_logo.png" alt="Portfolio Logo"></a>
                 </div>
                 <ul>
                     <li><a href="#home">Home</a></li>

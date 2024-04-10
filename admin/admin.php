@@ -19,7 +19,7 @@
 		<section id="sidebar">
 		<a href="#" class="brand">
 			<img src="../images/cj_logo.png" alt="">
-			<span class="text">AdminHub</span>
+			<span class="text">Admin Panel</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -68,14 +68,6 @@
 		<nav>
 			<i class='bx bx-menu' ></i>
 			<a href="#" class="nav-link">Categories</a>
-			<form action="#">
-				<div class="form-input">
-					<input type="search" placeholder="Search...">
-					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
-				</div>
-			</form>
-			<input type="checkbox" id="switch-mode" hidden>
-			<label for="switch-mode" class="switch-mode"></label>
 
 			<a href="#" class="profile">
 				<img src="../images/cj_logo.png">
@@ -85,23 +77,27 @@
 
 		<!-- MAIN -->
 		<main>
-			<!-- main body -->
+			<!-- =========================== MAIN BODY ================================= -->
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1>Home Page</h1>
 					<ul class="breadcrumb">
-						<li>
-							<a href="#">Dashboard</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
 							<a class="active" href="#">Home</a>
 						</li>
+						<!-- <li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li> -->
 					</ul>
 				</div>
+				<a href="#" class="btn-download">
+					<i class='bx bxs-edit' ></i>
+					<span class="text">Edit</span>
+				</a>
 			</div>
 
-			<ul class="box-info">
+			<!-- <ul class="box-info">
 				<li>
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
@@ -123,7 +119,52 @@
 						<p>Total Sales</p>
 					</span>
 				</li>
-			</ul>
+			</ul> -->
+
+			
+			<div class="col-12 grid-margin stretch-card">
+                
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit Home Page</h4>
+                  <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                    
+				  	<div class="form-group">
+                      <label for="post_title">Introduction</label>
+                      <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Hi, Im">
+                    </div>
+
+					<div class="form-group">
+                      <label for="post_title">Name</label>
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Name">
+                    </div>
+
+					<div class="form-group">
+                      <label for="post_title">Job</label>
+                      <input type="text" name="job" class="form-control" id="job" placeholder="Web Dev/Graphic Designer">
+                    </div>
+
+					<div class="form-group">
+						<div class="custom-file">
+							<label for="imageSelect" class="custom-file-label">Current Image</label>
+						</div>
+					</div>
+
+					<!-- <div class="form-group">
+                      <label for="post_title">Job <span style="color:red"> * </span> </label>
+                      <input type="text" name="job" class="form-control" id="job" placeholder="Web Dev/Graphic Designer" required="">
+                    </div> -->
+
+					<div class="form-group">
+                      <label for="post_title">Uploaded CV</label>
+                      <input type="text" name="job" class="form-control" id="job" placeholder="CV here" >
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+			
 			<!-- main body end -->
 
 		</main>
@@ -133,5 +174,6 @@
 	
 
 	<script src="assets/script.js"></script>
+	<script src="adminjs.js"></script>
 </body>
 </html>
