@@ -99,6 +99,7 @@ body {
 #sidebar .side-menu {
 	width: 100%;
 	margin-top: 48px;
+	padding-left: 0px !important;
 }
 #sidebar .side-menu li {
 	height: 48px;
@@ -344,6 +345,54 @@ body {
 	font-weight: 500;
 }
 
+.btn-edit {
+    display: inline-block;
+    background-color: green; /* Background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Rounded corners */
+    text-decoration: none; /* Remove default underline */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add shadow */
+}
+
+.btn-edit:hover {
+    background-color: darkgreen; /* Darker background color on hover */
+}
+
+.btn-edit i {
+    margin-right: 5px; /* Adjust icon spacing */
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-submit,
+.btn-cancel {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit {
+    background-color: green;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: red;
+    color: white;
+}
+
+.btn-submit:hover,
+.btn-cancel:hover {
+    opacity: 0.8;
+}
 
 
 

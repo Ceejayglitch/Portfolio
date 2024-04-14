@@ -39,18 +39,20 @@
 					<h1>Home Page</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="active" href="#">Home</a>
+							<a class="" href="#">Home</a>
 						</li>
-						<!-- <li><i class='bx bx-chevron-right' ></i></li>
+						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Home</a>
-						</li> -->
+							<a class="active" href="#">Edit Home</a>
+						</li>
 					</ul>
 				</div>
-				<a href="edit-admin.php" class="btn-download">
+                    <!-- add submit button for post here -->
+                
+				<!-- <a href="#" class="btn-download">
 					<i class='bx bxs-edit' ></i>
 					<span class="text">Edit</span>
-				</a>
+				</a> -->
 			</div>
 
 			<!-- <ul class="box-info">
@@ -87,23 +89,28 @@
                     
 				  	<div class="form-group">
                       <label for="post_title">Introduction</label>
-                      <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Hi, Im" readonly>
+                      <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Hi, Im">
                     </div>
 
 					<div class="form-group">
                       <label for="post_title">Name</label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Name" readonly>
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Name">
                     </div>
 
+
+                    <a href="add-jobs.php" class="btn-edit">
+					    <i class='bx bxs-edit' ></i>
+					    <span class="text">Edit Jobs</span>
+				    </a>
 					<div class="form-group">
                       <label for="post_title">Job</label>
-                      <input type="text" name="job" class="form-control" id="job" placeholder="Web Dev/Graphic Designer" readonly>
+                      <input type="text" name="job" class="form-control" id="job" placeholder="Web Dev/Graphic Designer" disabled >
                     </div>
-
+                   
 					<div class="form-group"> <!-- EDITED ---------------------------------------->
 						<div class="custom-file">
-							<label for="formFileLg" class="form-label">Current Image</label>
-                            <input class="form-control form-control-lg" id="formFileLg" type="file" disabled>
+							<label for="img" class="form-label">Upload Image</label>
+                            <input class="form-control form-control-lg" id="img" type="file">
 						</div>
 					</div>
 
@@ -116,11 +123,18 @@
 
 					<div class="form-group"> <!-- EDITED ---------------------------------------->
 						<div class="custom-file">
-							<label for="formFileLg" class="form-label">Current CV</label>
-                            <input class="form-control form-control-lg" id="formFileLg" type="file" disabled>
+							<label for="cv" class="form-label">Upload CV</label>
+                            <input class="form-control form-control-lg" id="cv" type="file">
 						</div>
 					</div>
 
+                    <div class="button-container">
+                    <button type="submit" class="btn-submit">Submit</button>
+                    <a href="admin.php" class="btn-cancel">
+                        <i class='bx bx-undo'></i> Cancel
+                    </a>
+                    </div>
+                    
                   </form>
                 </div>
               </div>
