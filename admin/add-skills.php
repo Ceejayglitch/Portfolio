@@ -5,41 +5,43 @@
 
 <?php 
 
-// if(isset($_POST["Submit"])){
-// 	// start of post submit
+if(isset($_POST["Submit"])){
+	// start of post submit
 
-// 	$Job = $_POST["jobTitle"];
+	$SkillNamePost = $_POST["Skills"];
+	$SkillRangePost = $_POST["Lvl"];
 
-// 	if(empty($Job)){
-// 		$_SESSION["ErrorMessage"]="All fields must be filled out";
-// 		Redirect_to("add-jobs.php");
-// 	}elseif (strlen($Job)< 2){
-// 		$_SESSION["ErrorMessage"]="Job Title should be greater than 2 characters";
-// 		Redirect_to("add-jobs.php");
-// 	}elseif (strlen($Job) > 29){
-// 		$_SESSION["ErrorMessage"]="Job Title should NOT exceed more than 30 characters";
-// 		Redirect_to("add-jobs.php");
-// 	}else{
-// 		// query to instert job data into db
-// 		global $ConnectingDB;
-// 		$sql = "INSERT INTO jobs(jobTitle)";
-// 		$sql .="VALUES(:jobTitle)";
+	if(empty($SkillNamePost) && empty($SkillRangePost)){
+		$_SESSION["ErrorMessage"]="All fields must be filled out";
+		Redirect_to("add-skills.php");
+	}elseif (strlen($SkillNamePost)< 2){
+		$_SESSION["ErrorMessage"]="Skill Name should be greater than 2 characters";
+		Redirect_to("add-skills.php");
+	}elseif (strlen($SkillNamePost) > 29){
+		$_SESSION["ErrorMessage"]="Skill Name should NOT exceed more than 30 characters";
+		Redirect_to("add-skills.php");
+	}else{
+		// query to insert job data into db
+		global $ConnectingDB;
+		$sql = "INSERT INTO skills (skillName, skillRange) ";
+		$sql .= "VALUES (:skillname, :skillrange)";
 
-// 		$stmt = $ConnectingDB->prepare($sql);
+		$stmt = $ConnectingDB->prepare($sql);
 
-// 		$stmt->bindValue(':jobTitle',$Job);
-// 		$Execute=$stmt->execute();
+		$stmt->bindValue(':skillname', $SkillNamePost);
+		$stmt->bindValue(':skillrange', $SkillRangePost);
+		$Execute = $stmt->execute();
 
-// 		if($Execute){
-// 			$_SESSION["SuccessMessage"]="Job added successfully";
-// 		} else {
-// 			$_SESSION["ErrorMessage"]= "Something went wrong. Try Again !";
-// 		}
-// 		Redirect_to("add-jobs.php");
-// 	}
+		if($Execute){
+			$_SESSION["SuccessMessage"]="Skill added successfully";
+		} else {
+			$_SESSION["ErrorMessage"]= "Something went wrong. Try Again !";
+		}
+		Redirect_to("add-skills.php");
+	}
 
-// // end of post submit
-// }
+// end of post submit
+}
 
 
 ?>
@@ -89,7 +91,7 @@
 						</li>
 						<li><i class='bx bx-chevron-right' ></i></li>
 						<li>
-							<a class="active" href="#">Edit Skills</a>
+							<a class="active" href="#">Add Skills</a>
 						</li>
                         <!-- <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
@@ -105,8 +107,8 @@
 				</a> -->
 			</div>
 			<?php
-			// echo ErrorMessage();
-			// echo SuccessMesage();
+			echo ErrorMessage();
+			echo SuccessMessage();
 			?>
 
 			
@@ -145,6 +147,53 @@
                     
                   </form>
                 </div>
+
+				<!-- Add table here -->
+				<section class="container py-2 mb-12">
+					<h2 style="text-align: center;">Skill List</h2>
+					<div class="row">
+						<div class="col-lg-10">
+							<table class="table table-striped table-hover">
+								<thead class="thead-dark">
+								<tr>
+									<th>#</th>
+									<th>Skill Name</th>
+									<th>Skill Range</th>
+									<th>Edit / Delete</th>
+								</tr>
+								</thead>
+								<?php
+
+								global $ConnectingDB;
+								$sql = "SELECT * FROM skills";
+								$stmt = $ConnectingDB->query($sql);
+								$count = 0;
+								while ($DataRows = $stmt->fetch()){
+									$skillId			=	$DataRows["skill_id"];
+									$skillName			=	$DataRows["skillName"];
+									$skillRange			=	$DataRows["skillRange"];
+									$count++;
+								?>
+								<tbody>
+								<tr>
+									<td><?php echo $count; ?></td>
+									<td><?php echo $skillName; ?></td>
+									<td><?php echo $skillRange; ?></td>
+									<td>
+										<a href="edit-skills.php?skill_id=<?php echo $skillId; ?>"><span class="btn btn-warning">Edit</span></a>
+										<a href="delete-skills.php?skill_id=<?php echo $skillId; ?>"><span class="btn btn-danger">Delete</span></a>
+									</td>
+								</tr>
+								</tbody>
+								<?php } ?>
+
+							</table>
+						</div>
+					</div>
+
+				</section>
+
+
               </div>
             </div>
 

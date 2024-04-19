@@ -162,7 +162,7 @@
 					<div class="form-group"> <!-- EDITED ---------------------------------------->
 						<div class="custom-file">
 							<label for="formFileLg" class="form-label">Uploaded CV Name</label>
-							<div class="filename"><?php echo $Filepath; ?></div>
+							<div class="filename"><?php echo $CV ?></div>
                             <!-- <input class="form-control form-control-lg" id="formFileLg" type="file" value="<?php echo $CV; ?>" disabled> -->
 						</div>
 					</div>

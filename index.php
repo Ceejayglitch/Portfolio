@@ -74,7 +74,7 @@
                         and producing eye-catching designs.
                     </p> -->
                     <button>
-                        <a href="admin/upload/<?php echo $CV; ?>">Download CV</a>
+                        <a href="admin/upload/<?php echo $CV; ?>" download>Download CV</a>
                      </button>
                 </div>
                 <div class="right">
@@ -93,21 +93,30 @@
               <!-- WELCOME TEXT -->
               <!-- <div class="row"> -->
 
-                <!-- ilalagay sa contact -->
-                <!-- <div class="col-md-4">
-                    <ul class="info">
-						<li><span class="first-block">Full Name:</span><span class="second-block">Criston Jade B. Enolpe</span></li>
-						<li><span class="first-block">Date of Birth:</span><span class="second-block">November 13, 1998</span></li>
-						<li><span class="first-block">Email:</span><span class="second-block">cristonjade@gmail.com</span></li>
-						<li><span class="first-block">Phone:</span><span class="second-block">09361877020</span></li>
-						<li><span class="first-block">Address:</span><span class="second-block">Zamboanga City</span></li>
-					</ul>
-                </div> -->
+              <?php
+
+                    $sql = "SELECT * FROM about WHERE about_id = 1";
+                    $stmt = $ConnectingDB->query($sql);
+                    while ($DataRows = $stmt->fetch()){
+                        $aboutId				=	$DataRows["about_id"];
+                        $aboutme				=	$DataRows["about_me"];
+                        $college				=	$DataRows["college"];
+                        $collegeYr			    =	$DataRows["collegeYr"];
+    
+                        $shs					=	$DataRows["senior_high"];
+                        $shsYr					=	$DataRows["shsYr"];
+    
+                        $hs						=	$DataRows["highschool"];
+                        $hsYr					=	$DataRows["hsYr"];
+    
+                        $grade					=	$DataRows["gradeschool"];
+                        $gradeYr				=	$DataRows["gradeYr"];
+                        
+                    }
+                ?>
                 <div class="short-desc">
                     <h2>A little about me</h2>
-					<p>Hello, I'm Criston Jade B. Enolpe. A Full-stack developer, and graphic designer.
-                        I specialize in crafting engaging user experiences, developing reliable web application,
-                        and producing eye-catching designs.
+					<p><?php echo $aboutme; ?>
                     </p>
 						<!-- <ul class="fh5co-social-icons">
 							<li><a href="https://www.facebook.com/Ceejayski/" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
@@ -121,7 +130,7 @@
 
             <div id="fh5co-resume" class="fh5co-bg-color">
                 <div class="container">
-                    <div class="row justify-content-center pb-5">
+                    <div class="row justify-content-center pt-5">
                         <div class="col-md-12 heading-section text-center ftco-animate" data-aos="fade-up" data-aos-duration="1000">
                             <h1 class="big big-2">Resume</h1>
                             <h2 class="mb-4"> My Resume</h2>
@@ -138,10 +147,10 @@
                                     <div class="timeline-panel"  data-aos="fade-right" data-aos-duration="1800">
                                         <div class="timeline-heading">
                                             <h3 class="timeline-title">College</h3>
-                                            <span class="company">2020-2024</span>
+                                            <span class="company"><?php echo $collegeYr; ?></span>
                                         </div>
                                         <div class="timeline-body">
-                                            <p>Western Mindanao State University</p>
+                                            <p><?php echo $college; ?></p>
                                         </div>
                                     </div>
                                 </li>
@@ -150,10 +159,10 @@
                                     <div class="timeline-panel" data-aos="fade-left" data-aos-duration="1800">
                                         <div class="timeline-heading">
                                             <h3 class="timeline-title">Senior High School</h3>
-                                            <span class="company">2018-2020</span>
+                                            <span class="company"><?php echo $shsYr; ?></span>
                                         </div>
                                         <div class="timeline-body">
-                                            <p>STI Colleges Zamboanga</p>
+                                            <p><?php echo $shs; ?></p>
                                         </div>
                                     </div>
                                 </li>
@@ -162,10 +171,10 @@
                                     <div class="timeline-panel" data-aos="fade-right" data-aos-duration="1800">
                                         <div class="timeline-heading">
                                             <h3 class="timeline-title">Junior Highschool</h3>
-                                            <span class="company">2011-2017</span>
+                                            <span class="company"><?php echo $hsYr; ?></span>
                                         </div>
                                         <div class="timeline-body">
-                                            <p>Manicahan National Highschool</p>
+                                            <p><?php echo $hs; ?></p>
                                         </div>
                                     </div>
                                 </li>
@@ -174,10 +183,10 @@
                                     <div class="timeline-panel" data-aos="fade-left" data-aos-duration="1800">
                                         <div class="timeline-heading">
                                             <h3 class="timeline-title">Grade School</h3>
-                                            <span class="company">2005-2009</span>
+                                            <span class="company"><?php echo $gradeYr; ?></span>
                                         </div>
                                         <div class="timeline-body">
-                                            <p>Canelar Elementary School <br> Manicahan Poblacion Elementary School</p>
+                                            <p><?php echo $grade; ?></p>
                                         </div>
                                     </div>
                                 </li>
@@ -192,6 +201,8 @@
 
             <!-- SKILLS -->
 
+
+
             <div class="skills" id="skillsSection">
                 <div class="container">
                     <div class="row justify-content-center pb-5">
@@ -201,14 +212,33 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="skill-content col-md-6 col-xs-11" data-aos="fade-right" data-aos-duration="1000">
+                        <!-- <div class="skill-content col-md-6 col-xs-11" data-aos="fade-right" data-aos-duration="1000">
                             <h2>SKILLS</h2>
                             <h4>Full-stack Developer &AMP; Graphic Designer</h4>
-                            <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
-                            <p>Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p> -->
-                        </div>
+                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
+                            <p>Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                        </div> -->
+                        <!--========================= SKILL QUERY ====================-->
+
+                        <?php
+                        $sql = "SELECT * FROM skills";
+                        $stmt = $ConnectingDB->query($sql);
+                        while ($DataRows = $stmt->fetch()) {
+                            $skillName = $DataRows["skillName"];
+                            $skillRange = $DataRows["skillRange"];
+                        ?>
                         <div class="skillbar col-md-6 col-xs-11" data-aos="fade-left" data-aos-duration="1000">
-                            <span class="num" data-val="75">Web Design <small>75%</small></span> <!-- php echo code to change static 75 and data val into something editable-->
+                            <span class="num" data-val="<?php echo $skillRange; ?>"><?php echo $skillName; ?> <small><?php echo $skillRange; ?>%</small></span>
+                            <div class="progress">
+                                <div data-aos="fade-right" data-aos-duration="1800" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="<?php echo $skillRange; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $skillRange; ?>%;"></div>
+                            </div>
+                        </div>
+                        <?php } ?>
+
+
+                        
+                        <!-- <div class="skillbar col-md-6 col-xs-11" data-aos="fade-left" data-aos-duration="1000">
+                            <span class="num" data-val="75">Web Design <small>75%</small></span>
                                 <div class="progress">
                                     <div data-aos="fade-right" data-aos-duration="1800" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
                                 </div>
@@ -224,7 +254,7 @@
                                 <div class="progress">
                                     <div data-aos-offset="0" data-aos="fade-right" data-aos-duration="3000" class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;"></div>
                                 </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -317,6 +347,22 @@
     </section>
 
 
+
+                    <?php
+                            $sql = "SELECT * FROM contact WHERE id = 1";
+                            $stmt = $ConnectingDB->query($sql);
+                            while ($DataRows = $stmt->fetch()) {
+                                $FullName   = $DataRows["fn"];
+                                $Email      = $DataRows["email"];
+                                $Phone      = $DataRows["phone"];
+                                $Address    = $DataRows["address"];
+                                $FB         = $DataRows["fb"];
+                                $Git        = $DataRows["git"];
+                                $Insta      = $DataRows["insta"];
+                            }
+                    
+                    ?>
+
     <section class="contacts" id="contactSect">
         <div class="container-about">
               <!-- WELCOME TEXT -->
@@ -324,20 +370,25 @@
                 <!-- ilalagay sa contact -->
                 <div class="col-md-4">
                     <ul class="info">
-						<li><span class="first-block">Full Name:</span><span class="second-block">Criston Jade B. Enolpe</span></li>
+						<li><span class="first-block">Full Name:</span><span class="second-block"><?php echo $FullName ?></span></li>
 						<!-- <li><span class="first-block">Date of Birth:</span><span class="second-block">November 13, 1998</span></li> -->
-						<li><span class="first-block">Email:</span><span class="second-block">cristonjade@gmail.com</span></li>
-						<li><span class="first-block">Phone:</span><span class="second-block">09361877020</span></li>
-						<li><span class="first-block">Address:</span><span class="second-block">Zamboanga City</span></li>
+						<li><span class="first-block">Email:</span><span class="second-block"><?php echo $Email ?></span></li>
+						<li><span class="first-block">Phone:</span><span class="second-block"><?php echo $Phone ?></span></li>
+						<li><span class="first-block">Address:</span><span class="second-block"><?php echo $Address ?></span></li>
 					</ul>
                 </div>
                 <div class="col-md-8">
                     <h2>Contact Me</h2>
 					<p>Have a project in mind or just want to say hello? I'd love to hear from you! Feel free to reach out using the contact information given or by filling out the form below. </p>
 						<ul class="fh5co-social-icons">
-							<li><a href="https://www.facebook.com/Ceejayski/" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+                            
+                        <li><a href="<?php echo $FB ?>" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
+							<li><a href="<?php echo $Git ?>" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+							<li><a href="<?php echo $Insta ?>" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+
+                            <!-- <li><a href="https://www.facebook.com/Ceejayski/" target="_blank"><i class="fa-brands fa-facebook"></i></a></li>
 							<li><a href="https://github.com/Ceejayglitch" target="_blank"><i class="fa-brands fa-github"></i></a></li>
-							<li><a href="https://www.instagram.com/c_jade.mp4/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li>
+							<li><a href="https://www.instagram.com/c_jade.mp4/" target="_blank"><i class="fa-brands fa-instagram"></i></a></li> -->
 						</ul>
                 </div>
               </div>

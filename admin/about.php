@@ -3,6 +3,52 @@
 <?php require_once("include/session.php") ?>
 <?php Confirm_Login() ?>
 
+<?php
+global $ConnectingDB;
+
+if(isset($_POST["Submit"])){
+    $AboutMe 		= $_POST['about'];
+    $College 		= $_POST['college'];
+    $CollegeYr 		= $_POST['collegeYr'];
+    $ShS		 	= $_POST['shs'];
+    $ShSYr 			= $_POST['shsYr'];
+    $HS 			= $_POST['hs'];
+    $HSYr 			= $_POST['hsYr'];
+    $Gradeschool 	= $_POST['elementary'];
+    $GradeschoolYr 	= $_POST['gradeYr'];
+
+    if(empty($AboutMe) || empty($College) || empty($ShS) || empty($HS) || empty($Gradeschool)){
+        $_SESSION["ErrorMessage"] = "All fields must be filled out";
+    } else {
+        // query to update about data in db
+        $sql = "UPDATE about 
+            SET about_me = :aboutMe, college = :college, senior_high = :shs, highschool = :hs, gradeschool = :elem, 
+            collegeYr = :collegeYr, shsYr = :shsYr, hsYr = :hsYr, gradeYr = :gradeYr 
+            WHERE about_id = 1";
+        $stmt = $ConnectingDB->prepare($sql);
+
+        $stmt->bindValue(':aboutMe', $AboutMe);
+        $stmt->bindValue(':college', $College);
+        $stmt->bindValue(':shs', $ShS);
+        $stmt->bindValue(':hs', $HS);
+        $stmt->bindValue(':elem', $Gradeschool);
+        $stmt->bindValue(':collegeYr', $CollegeYr);
+        $stmt->bindValue(':shsYr', $ShSYr);
+        $stmt->bindValue(':hsYr', $HSYr);
+        $stmt->bindValue(':gradeYr', $GradeschoolYr);
+
+        $Execute = $stmt->execute();
+
+        if($Execute){
+            $_SESSION["SuccessMessage"] = "About information updated successfully";
+        } else {
+            $_SESSION["ErrorMessage"] = "Something went wrong. Try Again!";
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -59,6 +105,11 @@
 					<span class="text">Edit</span>
 				</a> -->
 			</div>
+			
+			<?php
+			echo ErrorMessage();
+			echo SuccessMessage();
+			?>
 
 			<!-- <ul class="box-info">
 				<li>
@@ -84,41 +135,71 @@
 				</li>
 			</ul> -->
 
+
+			<?php
+			
+				$sql = "SELECT * FROM about";
+				$stmt = $ConnectingDB->query($sql);
+				$count = 0;
+				while ($DataRows = $stmt->fetch()){
+					$aboutId					=	$DataRows["about_id"];
+					$aboutmeEdit				=	$DataRows["about_me"];
+					$collegeEdit				=	$DataRows["college"];
+					$collegeYrEdit				=	$DataRows["collegeYr"];
+
+					$shsEdit					=	$DataRows["senior_high"];
+					$shsYrEdit					=	$DataRows["shsYr"];
+
+					$hsEdit						=	$DataRows["highschool"];
+					$hsYrEdit					=	$DataRows["hsYr"];
+
+					$gradeEdit					=	$DataRows["gradeschool"];
+					$gradeYrEdit				=	$DataRows["gradeYr"];
+					
+				}
+
+			?>
 			
 			<div class="col-12 grid-margin stretch-card">
                 
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Home Page</h4>
-                  <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                  <form class="forms-sample" action="about.php" method="POST" enctype="multipart/form-data">
                     
 				  	<div class="form-group">
-                      <label for="post_title">Little About Me</label>
-                      <input type="text" name="about" class="form-control" id="about" placeholder="Hello, I'm Criston Jade B. Enolpe. A Full-stack developer, and graphic designer.
-                        I specialize in crafting engaging user experiences, developing reliable web application,
-                        and producing eye-catching designs.">
+                      <label for="post_title">Little About Me<span style="color:red"> * </span></label>
+                      <input type="text" name="about" class="form-control" id="about" placeholder="" value="<?php echo $aboutmeEdit; ?>" required>
                     </div>
 
                         <h4>Resume</h4>
 
 					<div class="form-group">
-                      <label for="post_title">College</label>
-                      <input type="text" name="college" class="form-control" id="college" placeholder="College Name">
+                      <label for="post_title">College<span style="color:red"> * </span></label>
+                      <input type="text" name="college" class="form-control" id="college" value="<?php echo $collegeEdit; ?>" required>
+					  <label for="post_title">College Year<span style="color:red"> * </span></label>
+                      <input type="text" name="collegeYr" class="form-control" id="collegeYr" value="<?php echo $collegeYrEdit; ?>" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="post_title">Senior High School</label>
-                      <input type="text" name="shs" class="form-control" id="shs" placeholder="Senior High School Name">
+                      <label for="post_title">Senior High School<span style="color:red"> * </span></label>
+                      <input type="text" name="shs" class="form-control" id="shs" value="<?php echo $shsEdit; ?>" required>
+					  <label for="post_title">Senior High School Year<span style="color:red"> * </span></label>
+                      <input type="text" name="shsYr" class="form-control" id="shsYr"value="<?php echo $shsYrEdit; ?>" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="post_title">High School</label>
-                      <input type="text" name="hs" class="form-control" id="hs" placeholder="High School Name">
+                      <label for="post_title">High School<span style="color:red"> * </span></label>
+                      <input type="text" name="hs" class="form-control" id="hs" value="<?php echo $hsEdit; ?>" required>
+					  <label for="post_title">High School Year<span style="color:red"> * </span></label>
+                      <input type="text" name="hsYr" class="form-control" id="hsYr" value="<?php echo $hsYrEdit; ?>" required>
                     </div>
 
                     <div class="form-group">
-                      <label for="post_title">Grade School</label>
-                      <input type="text" name="elementary" class="form-control" id="elementary" placeholder="Grade School Name">
+                      <label for="post_title">Grade School<span style="color:red"> * </span></label>
+                      <input type="text" name="elementary" class="form-control" id="elementary" value="<?php echo $gradeEdit; ?>" required>  
+					  <label for="post_title">Grade School Year<span style="color:red"> * </span></label>
+                      <input type="text" name="gradeYr" class="form-control" id="gradeYr" value="<?php echo $gradeYrEdit; ?>" required>
                     </div>
 
 
@@ -136,7 +217,7 @@
 
 
                     <div class="button-container">
-                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="submit" name="Submit" class="btn-submit">Submit</button>
                     <!-- <a href="admin.php" class="btn-cancel">
                         <i class='bx bx-undo'></i> Cancel
                     </a> -->

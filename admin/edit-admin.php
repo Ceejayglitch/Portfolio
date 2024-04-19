@@ -10,27 +10,36 @@
 <?php
 	global $ConnectingDB;
 
+
+	$sql = "SELECT * FROM homepage";
+	$stmt = $ConnectingDB->query($sql);
+	while ($DataRows = $stmt->fetch()){
+		$IntrohantoEdit		=	$DataRows["intro"];
+		$NametoEdit			=	$DataRows["name"];
+		$ImagetoEdit			=	$DataRows["image"];
+		$CVtoEdit				=	$DataRows["cv_name"];
+		$FilepathtoEdit		=	$DataRows["cv_loc"];
+	}
+
+
+
 	if (isset($_POST["Submit"])) {
 		// Retrieve form data
 		$Introduction 		= $_POST['introduction'];
 		$Name 				= $_POST["name"];
-		$CVName 			= $_POST["file_name"];
-		$Image 				= $_FILES["image"]["name"];
-		// Set file destination paths
-		$Target 			= "img/".basename($_FILES["image"]["name"]);
+		$CVName 			= ""; // Initialize $CVName variable
+		// Check if a new image is uploaded
+		if (!empty($_FILES["image"]["name"])) {
+			$Image = $_FILES["image"]["name"];
+			$Target = "img/" . basename($_FILES["image"]["name"]);
+			move_uploaded_file($_FILES["image"]["tmp_name"], $Target);
+		} else {
+			// If no new image is uploaded, retain the existing image path
+			$Image = $ImagetoEdit;
+		}
 		$doc_name 			= $_FILES['docFile']['name'];
 		// Set file destination paths
 		$doc_dest_file 		= "upload/" . basename($_FILES['docFile']['name']);
-
-		// Print out file upload errors for debugging
-		echo "Image upload error: " . $_FILES['image']['error'] . "<br>";
-		echo "Document upload error: " . $_FILES['docFile']['error'] . "<br>";
-
-		// Check for file upload errors
-		if ($_FILES['image']['error'] !== UPLOAD_ERR_OK || $_FILES['docFile']['error'] !== UPLOAD_ERR_OK) {
-			$_SESSION["ErrorMessage"] = "File upload error. Please try again.";
-			Redirect_to("edit-admin.php");
-		}
 
 		// Validate document file extension
 		$doc_extension 		= pathinfo($doc_dest_file, PATHINFO_EXTENSION);
@@ -41,10 +50,12 @@
 			Redirect_to("edit-admin.php");
 		}
 
+		// Automatically set $CVName to the extension of the uploaded file
+		$CVName = $doc_name;
+
 		// Prepare the SQL query to update the record with id = 1
 		$sql = "UPDATE homepage SET intro = :introduction, name = :Name, image = :image, cv_name = :cvname, cv_loc = :cvpath WHERE id = 1";
 
-		// Prepare and execute the update query
 		$stmt = $ConnectingDB->prepare($sql);
 		$stmt->bindValue(':introduction', $Introduction);
 		$stmt->bindValue(':Name', $Name);
@@ -70,6 +81,7 @@
 		}
 	}
 ?>
+
 
 
 
@@ -130,19 +142,6 @@
 			<?php
 			echo ErrorMessage();
 			echo SuccessMessage();
-
-			$sql = "SELECT * FROM homepage";
-			$stmt = $ConnectingDB->query($sql);
-			while ($DataRows = $stmt->fetch()){
-				$IntrohantoEdit		=	$DataRows["intro"];
-				$NametoEdit			=	$DataRows["name"];
-				$ImagetoEdit			=	$DataRows["image"];
-				$CVtoEdit				=	$DataRows["cv_name"];
-				$FilepathtoEdit		=	$DataRows["cv_loc"];
-			}
-
-			
-
 
 			?>
 
@@ -220,14 +219,16 @@
                       <input type="text" name="job" class="form-control" id="job" placeholder="<?php echo htmlspecialchars(implode(",", $job_titles)); ?>" disabled >
                     </div>
                    
-					<div class="form-group"> 
-							<label for="formFileLg" class="form-label">Current Image</label>
-							<img src="img/<?php echo $ImagetoEdit; ?>" width="170px;" height="200px;"><!-- EDITED ---------------------------------------->
-						<div class="custom-file">
-							<label for="image" class="form-label">Upload Image</label>
-                            <input class="form-control form-control-lg" name="image" id="image" type="file">
+					 <!-- Existing Image -->
+						<div class="form-group">
+							<label for="existing_image">Current Image</label>
+							<img src="img/<?php echo $ImagetoEdit; ?>" width="170px;" height="200px;">
 						</div>
-					</div>
+						<!-- New Image (Optional) -->
+						<div class="form-group">
+							<label for="image">Upload New Image (Optional)</label>
+							<input class="form-control form-control-lg" name="image" id="image" type="file">
+						</div>
 
 
 					<!-- ===== SLIDER FOR SKILLS ===== -->
@@ -238,7 +239,7 @@
 
 					<div class="form-group">
                       <label for="file_name">CV Name<span style="color:red"> * </span> </label>
-                      <input type="text" name="file_name" class="form-control" id="file_name" placeholder="File Name" value="<?php echo $CVtoEdit; ?>" required>
+                      <input type="text" name="file_name" class="form-control" id="file_name" placeholder="File Name" value="<?php echo $CVtoEdit; ?>" disabled>
                     </div>
 
 					<div class="form-group">
