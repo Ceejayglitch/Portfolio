@@ -12,14 +12,14 @@ function ErrorMessage(){
 };
 
 
-function SuccessMesage(){
-    if(isset($_SESSION["SuccessMesage"])){
+function SuccessMessage(){
+    if(isset($_SESSION["SuccessMessage"])){
         $Output = "<div class=\"alert alert-success\">";
-        $Output .= htmlentities($_SESSION["SuccessMesage"]);
+        $Output .= htmlentities($_SESSION["SuccessMessage"]);
         $Output .= "</div>";
-        $_SESSION["SuccesMessage"] = null;
+        $_SESSION["SuccessMessage"] = null; // Corrected variable name here
         return $Output;
     }
-};
+}
 
 ?>

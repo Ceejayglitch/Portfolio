@@ -1,3 +1,4 @@
+
 const hamburger = document.querySelector('.hamburger');
 const navList = document.querySelector('nav ul');
 
@@ -7,10 +8,12 @@ hamburger.addEventListener('click', () => {
 
 });
 
+
+
 const typed = new Typed('.multiple', {
     strings: ['Full-stack Developer', 'Graphic Designer'],
-    typeSpeed:80,
-    backSpeed:80,
+    typeSpeed:50,
+    backSpeed:50,
     backDelay:1000,
     loop:true
 });

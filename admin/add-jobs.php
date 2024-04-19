@@ -1,6 +1,7 @@
 <?php require_once("include/DB.php"); ?>
 <?php require_once("include/function.php") ?>
 <?php require_once("include/session.php") ?>
+<?php Confirm_Login() ?>
 
 <?php 
 
@@ -84,15 +85,11 @@ if(isset($_POST["Submit"])){
 					<h1>Home Page</h1>
 					<ul class="breadcrumb">
 						<li>
-							<a class="" href="#">Home</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
 							<a class="" href="#">Edit Home</a>
 						</li>
                         <li><i class='bx bx-chevron-right' ></i></li>
                         <li>
-							<a class="active" href="#">Edit Jobs</a>
+							<a class="active" href="#">Add Jobs</a>
 						</li>
 					</ul>
 				</div>
@@ -105,7 +102,7 @@ if(isset($_POST["Submit"])){
 			</div>
 			<?php
 			echo ErrorMessage();
-			echo SuccessMesage();
+			echo SuccessMessage();
 			?>
 
 			
@@ -134,6 +131,52 @@ if(isset($_POST["Submit"])){
                     
                   </form>
                 </div>
+				<!-- Add table here -->
+				<section class="container py-2 mb-4">
+					<h2 style="text-align: center;">Job List</h2>
+					<div class="row">
+						<div class="col-lg-10">
+							<table class="table table-striped table-hover">
+								<thead class="thead-dark">
+								<tr>
+									<th>#</th>
+									<th>Job Name</th>
+									<th>Edit / Delete</th>
+								</tr>
+								</thead>
+								<?php
+
+								global $ConnectingDB;
+								$sql = "SELECT * FROM jobs";
+								$stmt = $ConnectingDB->query($sql);
+								$count = 0;
+								while ($DataRows = $stmt->fetch()){
+									$Id			=	$DataRows["id"];
+									$jobName	=	$DataRows["jobTitle"];
+									$count++;
+								?>
+								<tbody>
+								<tr>
+									<td><?php echo $count; ?></td>
+									<td><?php echo $jobName; ?></td>
+									<td>
+										<a href="EditJob.php?id=<?php echo $Id; ?>"><span class="btn btn-warning">Edit</span></a>
+										<a href="DeleteJob.php?id=<?php echo $Id; ?>"><span class="btn btn-danger">Delete</span></a>
+									</td>
+									<!-- <td> -->
+										<!-- echo $image here -->
+										<!-- <img src=upload/<?php ?>" width="170px;" height="50px" -->
+									<!-- </td> -->
+								</tr>
+								</tbody>
+								<?php } ?>
+
+							</table>
+						</div>
+					</div>
+
+				</section>
+
               </div>
             </div>
 

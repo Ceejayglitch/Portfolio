@@ -1,3 +1,9 @@
+<?php require_once("include/DB.php"); ?>
+<?php require_once("include/function.php") ?>
+<?php require_once("include/session.php") ?>
+<?php Confirm_Login() ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +59,25 @@
 				</a>
 			</div>
 
+			<?php
+			global $ConnectingDB;
+			
+			echo ErrorMessage();
+			echo SuccessMessage();
+
+			$sql = "SELECT * FROM homepage WHERE id = 1";
+			$stmt = $ConnectingDB->query($sql);
+			while ($DataRows = $stmt->fetch()){
+				$introhan			=	$DataRows["intro"];
+				$Name	=	$DataRows["name"];
+				$Image	=	$DataRows["image"];
+				$CV		=	$DataRows["cv_name"];
+				$Filepath	=	$DataRows["cv_loc"];
+			}
+
+
+			?>
+
 			<!-- <ul class="box-info">
 				<li>
 					<i class='bx bxs-calendar-check' ></i>
@@ -87,23 +112,43 @@
                     
 				  	<div class="form-group">
                       <label for="post_title">Introduction</label>
-                      <input type="text" name="introduction" class="form-control" id="introduction" placeholder="Hi, Im" readonly>
+                      <input type="text" name="introduction" class="form-control" id="introduction" placeholder="" value="<?php echo $introhan; ?>" disabled>
                     </div>
 
 					<div class="form-group">
                       <label for="post_title">Name</label>
-                      <input type="text" name="name" class="form-control" id="name" placeholder="Name" readonly>
+                      <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="<?php echo $Name; ?>" disabled>
                     </div>
+
+					<?php
+						$sql = "SELECT jobTitle FROM jobs";
+						$stmt = $ConnectingDB->query($sql);
+
+						$job_titles = array();
+
+						while ($DataRows = $stmt->fetch()) {
+							// Store each job title in the $job_titles array
+							$job_titles[] = $DataRows["jobTitle"];
+						}
+
+						if (!empty($job_titles)) {
+							// Concatenate all job titles into a single string separated by commas
+							$job_titles_str = implode(", ", $job_titles);
+						} else {
+							$job_titles_str = "Default Job Title";
+						}
+					?>
 
 					<div class="form-group">
                       <label for="post_title">Job</label>
-                      <input type="text" name="job" class="form-control" id="job" placeholder="Web Dev/Graphic Designer" readonly>
+                      <input type="text" name="job" class="form-control" id="job" placeholder="<?php echo htmlspecialchars(implode(",", $job_titles)); ?>" disabled >
                     </div>
 
 					<div class="form-group"> <!-- EDITED ---------------------------------------->
 						<div class="custom-file">
 							<label for="formFileLg" class="form-label">Current Image</label>
-                            <input class="form-control form-control-lg" id="formFileLg" type="file" disabled>
+							<img src="img/<?php echo $Image; ?>" width="170px;" height="200px;">
+                            <!-- <input class="form-control form-control-lg" id="formFileLg" type="file" value="<?php echo $Image; ?>" disabled> -->
 						</div>
 					</div>
 
@@ -116,8 +161,9 @@
 
 					<div class="form-group"> <!-- EDITED ---------------------------------------->
 						<div class="custom-file">
-							<label for="formFileLg" class="form-label">Current CV</label>
-                            <input class="form-control form-control-lg" id="formFileLg" type="file" disabled>
+							<label for="formFileLg" class="form-label">Uploaded CV Name</label>
+							<div class="filename"><?php echo $Filepath; ?></div>
+                            <!-- <input class="form-control form-control-lg" id="formFileLg" type="file" value="<?php echo $CV; ?>" disabled> -->
 						</div>
 					</div>
 

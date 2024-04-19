@@ -1,3 +1,7 @@
+<?php require_once("admin/include/DB.php"); ?>
+<?php require_once("admin/include/function.php") ?>
+<?php require_once("admin/include/session.php") ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,12 +42,29 @@
         </div>
     </header>
 
+    <?php
+        global $ConnectingDB;
+			
+        // echo ErrorMessage();
+        // echo SuccessMessage();
+
+        $sql = "SELECT * FROM homepage WHERE id = 1";
+        $stmt = $ConnectingDB->query($sql);
+        while ($DataRows = $stmt->fetch()){
+            $introhan		=	$DataRows["intro"];
+            $Name	        =	$DataRows["name"];
+            $Image	        =	$DataRows["image"];
+            $CV		        =	$DataRows["cv_name"];
+            $Filepath	    =	$DataRows["cv_loc"];
+        }
+    ?>
+
     <section class="home" id="home">
         <div class="container">
             <div class="home-info">
                 <div class="left">
-                    <h3>Hello, I'm</h3>
-                    <h1>Criston Jade</h1>
+                    <h3><?php echo $introhan; ?></h3>
+                    <h1><?php echo $Name; ?></h1>
                     <h4>
                         I'm a <span class="multiple"></span>
                     </h4>
@@ -53,12 +74,12 @@
                         and producing eye-catching designs.
                     </p> -->
                     <button>
-                        Download CV
+                        <a href="admin/upload/<?php echo $CV; ?>">Download CV</a>
                      </button>
                 </div>
                 <div class="right">
                     <div class="profile" data-aos="fade-up" data-aos-duration="1500">
-                        <img src="images/cj.png" alt="">
+                        <img src="admin/img/<?php echo $Image; ?>" alt="">
                     </div>
                 </div>
             </div>
@@ -160,60 +181,6 @@
                                         </div>
                                     </div>
                                 </li>
-        
-
-                                <!-- <br>
-                                <li class="timeline-heading text-center animate-box">
-                                    <div><h3>Education</h3></div>
-                                </li>
-                                <li class="timeline-inverted animate-box">
-                                    <div class="timeline-badge"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="timeline-panel" data-aos="fade-left" data-aos-duration="1800">
-                                        <div class="timeline-heading">
-                                            <h3 class="timeline-title">Masters Degree</h3>
-                                            <span class="company">University Name - 2007 - 2009</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem Ipsum Dolor</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-unverted">
-                                    <div class="timeline-badge"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="timeline-panel" data-aos="fade-right" data-aos-duration="1800">
-                                        <div class="timeline-heading">
-                                            <h3 class="timeline-title">Bachelors Degree</h3>
-                                            <span class="company">University Name - 2002 - 2006</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem Ipsum Dolor</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-inverted animate-box">
-                                    <div class="timeline-badge"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="timeline-panel" data-aos="fade-left" data-aos-duration="1800">
-                                        <div class="timeline-heading">
-                                            <h3 class="timeline-title">Diploma Course</h3>
-                                            <span class="company">College Name - 1999 - 2001</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem Ipsum Dolor</p>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="timeline-unverted">
-                                    <div class="timeline-badge"><i class="fa-solid fa-graduation-cap"></i></div>
-                                    <div class="timeline-panel" data-aos="fade-right" data-aos-duration="1800">
-                                        <div class="timeline-heading">
-                                            <h3 class="timeline-title">Graduation</h3>
-                                            <span class="company">College Name - 1994 - 1998</span>
-                                        </div>
-                                        <div class="timeline-body">
-                                            <p>Lorem Ipsum Dolor</p>
-                                        </div>
-                                    </div>
-                                </li> -->
                             </ul>
                         </div>
                     </div>
@@ -237,8 +204,8 @@
                         <div class="skill-content col-md-6 col-xs-11" data-aos="fade-right" data-aos-duration="1000">
                             <h2>SKILLS</h2>
                             <h4>Full-stack Developer &AMP; Graphic Designer</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
-                            <p>Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
+                            <!-- <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet. Dolore magna aliquam erat volutpat.</p>
+                            <p>Dolore magna aliquam erat volutpat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p> -->
                         </div>
                         <div class="skillbar col-md-6 col-xs-11" data-aos="fade-left" data-aos-duration="1000">
                             <span class="num" data-val="75">Web Design <small>75%</small></span> <!-- php echo code to change static 75 and data val into something editable-->
