@@ -340,6 +340,15 @@
                             </div>
                         </a>
                     </div>
+                    <div class="col-md-3 text-center col-padding animate-box">
+                        <a href="images/Art.jpg"  target="_blank" class="work" style="background-image: url(images/Art.jpg);">
+                            <div class="desc">
+                                <h3>Brutalism Poster</h3>
+                                <span>Graphic Design</span>
+                            </div>
+                        </a>
+                    </div>
+
                 </div>
             </div>
         </div>
