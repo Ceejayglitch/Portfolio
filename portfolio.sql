@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2024 at 05:06 AM
+-- Generation Time: Apr 21, 2024 at 01:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -153,7 +153,10 @@ CREATE TABLE `projects` (
 
 INSERT INTO `projects` (`id`, `projName`, `projImg`, `projType`, `projLink`) VALUES
 (1, 'Brutalism Poster', 'Art.jpg', 'Graphic Design', NULL),
-(2, 'SERDAC', NULL, 'Website', 'fb.com');
+(5, 'Y2K Poster', 'Enolpe Y2K Music Festival Poster.png', 'Graphic Design', NULL),
+(6, 'Good Boy', 'Gboy.png', 'Graphic Design', NULL),
+(7, 'Smoking Kills', 'SMOKING.png', 'Graphic Design', NULL),
+(8, 'SERDAC Website', NULL, 'Website', 'https://github.com/Ceejayglitch/WMSU-SERDAC');
 
 -- --------------------------------------------------------
 
@@ -244,7 +247,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT for table `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `skills`

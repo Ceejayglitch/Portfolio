@@ -12,6 +12,7 @@
 	$sql = "SELECT * FROM projects WHERE id = '$SearchQueryParameter'";
 	$stmt = $ConnectingDB->query($sql);
 	while ($DataRows = $stmt->fetch()){
+        $projectId          =   $DataRows['id'];
 		$nameEdit		    =	$DataRows["projName"];
 		$imgEdit			=	$DataRows["projImg"];
 		$typeEdit			=	$DataRows["projType"];
@@ -40,7 +41,7 @@
         // $sql = "INSERT INTO projects (projName, projImg, projType, projLink)";
         // $sql .= "VALUES(:projName, :projImg, :projType, :projLink)";
 
-        $sql =  "UPDATE projects SET projName = :projName, projImg = :projImg, projType = :projType, projLink = :projLink WHERE id = :SearchQueryParameter";
+        $sql =  "UPDATE projects SET projName = :projName, projImg = :projImg, projType = :projType, projLink = :projLink WHERE id = $SearchQueryParameter";
         $stmt = $ConnectingDB->prepare($sql);
         $stmt->bindValue(':projName', $ProjName);
         $stmt->bindValue(':projImg', $Image);
@@ -130,7 +131,7 @@
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Edit Home Page</h4>
-                  <form class="forms-sample" action="edit-project.php?skill_id=<?php echo $SearchQueryParameter; ?>" method="POST" enctype="multipart/form-data">
+                  <form class="forms-sample" action="edit-project.php?id=<?php echo $SearchQueryParameter; ?>" method="POST" enctype="multipart/form-data">
                     
 				  	<div class="form-group">
                       <label for="post_title">Project Name<span style="color:red"> * </span> </label>
@@ -144,8 +145,13 @@
                     </div>
 
                     <div class="form-group" id="imageFormGroup">
+                        <label for="formFileLg" class="form-label">Current Image</label>
+                        <img src="img/<?php echo $imgEdit; ?>" width="170px;" height="200px;" id="currentImage">
+                        <br>
+                       
+                        <br>
                         <label for="image">Upload Image</label>
-                        <input class="form-control form-control-lg" name="image" id="image" type="file">
+                        <input class="form-control form-control-lg" name="image" id="image" type="file" value="None">
                     </div>
 
                     <div class="form-group" id="websiteFormGroup">

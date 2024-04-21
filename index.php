@@ -274,15 +274,31 @@
             <div class="container">
 
                 <div class="row">
-                    <div class="col-md-3 text-center col-padding animate-box">
-                        <a href="images/Art.jpg"  target="_blank" class="work" style="background-image: url(images/Art.jpg);">
-                            <div class="desc">
-                                <h3>Brutalism Poster</h3>
-                                <span>Graphic Design</span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 text-center col-padding animate-box">
+                        <?php 
+                            $sql = "SELECT * FROM projects";
+                            $stmt = $ConnectingDB->query($sql);
+                            while($DataRows = $stmt->fetch()){
+                                $ID         = $DataRows['id'];
+                                $Project    = $DataRows['projName'];
+                                $ProjectImg = $DataRows['projImg'];
+                                $Type       = $DataRows['projType'];
+                                $ProjLink   = $DataRows['projLink'];
+                        ?>
+                        <div class="col-md-3 text-center col-padding animate-box">
+                            <?php if ($Type === 'Graphic Design'): ?>
+                                <a href="<?php echo 'images/' . $ProjectImg; ?>" target="_blank" class="work" style="background-image: url(<?php echo 'images/' . $ProjectImg; ?>);">
+                            <?php elseif ($Type === 'Website'): ?>
+                                <a href="<?php echo $ProjLink; ?>" target="_blank" class="work" style="background-image: url(images/default.png);">
+                            <?php endif; ?>
+                                <div class="desc">
+                                    <h3><?php echo $Project; ?></h3>
+                                    <span><?php echo $Type; ?></span>
+                                </div>
+                            </a>
+                        </div>
+                        <?php } ?>
+
+                    <!-- <div class="col-md-3 text-center col-padding animate-box">
                         <a href="images/Enolpe_Y2K_Music_Festival_Poster.png" target="_blank" class="work" style="background-image: url(images/Enolpe_Y2K_Music_Festival_Poster.png);">
                             <div class="desc">
                                 <h3>Y2K Poster</h3>
@@ -347,7 +363,7 @@
                                 <span>Graphic Design</span>
                             </div>
                         </a>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
